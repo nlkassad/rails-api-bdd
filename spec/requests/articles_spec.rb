@@ -32,7 +32,19 @@ RSpec.describe 'Articles API' do
 
       articles_response = JSON.parse(response.body)
       expect(articles_response.length).to eq(articles.count)
-      expect(articles_response.first['title']).to eq(article['title'])
+      expect(articles_response.first['title']).to eq(article[:title])
+    end
+  end
+
+  describe 'GET /articles/:id' do
+    it 'shows one article' do
+      get "/articles/#{article.id}"
+
+      expect(response).to be_success
+
+      article_response = JSON.parse(response.body)
+      expect(article_response['id']).not_to be_nil
+      expect(article_response['title']).to eq(article[:title])
     end
   end
 
@@ -42,7 +54,14 @@ RSpec.describe 'Articles API' do
   end
 
   describe 'POST /articles' do
-    skip 'creates an article' do
+    it 'creates an article' do
+      post '/articles', article: article_params, format: :json
+
+      expect(response).to be_success
+
+      article_response = JSON.parse(response.body)
+      expect(article_response['id']).not_to be_nil
+      expect(article_response['title']).to eq(article_params[:title])
     end
   end
 

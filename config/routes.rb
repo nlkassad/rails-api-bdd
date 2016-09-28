@@ -6,5 +6,7 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show]
 
   get '/articles' => 'articles#index'
+  get '/articles/:id' => 'articles#show'
+  post '/articles' => 'articles#create'
   # resources :articles, only: [:index]
 end

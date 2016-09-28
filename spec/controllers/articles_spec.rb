@@ -36,10 +36,20 @@ RSpec.describe ArticlesController do
   end
 
   describe 'GET show' do
-    skip 'is successful' do
+    before(:each) { get :show, id: article.id }
+    it 'is successful' do
+      expect(response.status).to eq(200)
     end
 
-    skip 'renders a JSON response' do
+    it 'renders a JSON response' do
+      article_response = JSON.parse(response.body)
+      expect(article_response).not_to be_nil
+      # expect(article_response['title']).to eq(article.title)
+    end
+
+    it 'renders a hash' do
+      article_response = JSON.parse(response.body)
+      expect(article_response).to a_kind_of(Hash)
     end
   end
 
@@ -48,10 +58,13 @@ RSpec.describe ArticlesController do
       post :create, article: article_params, format: :json
     end
 
-    skip 'is successful' do
+    it 'is successful' do
+      expect(response.status).to eq(201)
     end
 
-    skip 'renders a JSON response' do
+    it 'renders a JSON response' do
+      article_response = JSON.parse(response.body)
+      expect(article_response).not_to be_nil
     end
   end
 
