@@ -8,5 +8,6 @@ Rails.application.routes.draw do
   get '/articles' => 'articles#index'
   get '/articles/:id' => 'articles#show'
   post '/articles' => 'articles#create'
+  patch '/articles/:id' => 'articles#update'
   # resources :articles, only: [:index]
 end
