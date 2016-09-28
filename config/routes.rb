@@ -9,5 +9,7 @@ Rails.application.routes.draw do
   get '/articles/:id' => 'articles#show'
   post '/articles' => 'articles#create'
   patch '/articles/:id' => 'articles#update'
+  delete '/articles/:id' => 'articles#destroy'
+  # resources :articles, except: [:new, :edit]
   # resources :articles, only: [:index]
 end
